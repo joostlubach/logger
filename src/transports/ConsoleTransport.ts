@@ -89,10 +89,10 @@ export default class ConsoleTransport extends LoggerTransport {
 
   protected stylesForLevel(level: LogLevel): Styles {
     switch (level) {
-      case 'info':    return {color: '#3887D3'}
-      case 'warning': return {backgroundColor: 'yellow'}
-      case 'error':   return {color: 'red'}
-      default:        return {}
+    case 'info': return {color: '#3887D3'}
+    case 'warning': return {backgroundColor: 'yellow'}
+    case 'error': return {color: 'red'}
+    default: return {}
     }
   }
 

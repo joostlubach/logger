@@ -12,10 +12,10 @@ export default abstract class LoggerTransport {
 
   private numericLevel(level: LogLevel) {
     switch (level) {
-      case 'debug':   return 1
-      case 'info':    return 2
-      case 'warning': return 3
-      case 'error':   return 4
+    case 'debug': return 1
+    case 'info': return 2
+    case 'warning': return 3
+    case 'error': return 4
     }
   }
 
