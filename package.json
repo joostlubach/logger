@@ -15,8 +15,8 @@
     "build:tsc:esm": "tsc -p tsconfig.prod.json --module esnext --outDir dist/esm --declarationDir dist/types",
     "build:tsc:cjs": "tsc -p tsconfig.prod.json --module commonjs --outDir dist/cjs --declaration false --declarationMap false",
     "clean": "rimraf dist",
-    "lint": "eslint src --ext .ts,.tsx",
-    "check": "tsc -p . --noEmit"
+    "check": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx"
   },
   "peerDependencies": {
     "react": "^18.0",
@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "lodash": "^4.17.21",
-    "logger": "workspace:^",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-timer": "workspace:^",
