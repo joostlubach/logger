@@ -10,9 +10,10 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "check": "tsc --noEmit",
-    "lint": "eslint src --ext .ts,.tsx"
-  },
+    "check": "tsc -p . --noEmit",
+    "lint": "eslint src --ext ts,tsx",
+    "test": "NODE_ENV=test DATA_ENV=test jest"
+},
   "peerDependencies": {
     "react": "^18.0",
     "react-dom": "^18.0"
