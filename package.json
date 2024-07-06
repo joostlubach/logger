@@ -19,8 +19,6 @@
   },
   "dependencies": {
     "lodash": "^4.17.21",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "react-timer": "workspace:^",
     "scroll-into-view": "^1.16.2",
     "uuid": "^9.0.1"
@@ -35,5 +33,6 @@
     "tsc-alias": "^1.8.8",
     "typescript": "5.4.3",
     "ytil": "workspace:^"
-  }
+  },
+  "packageManager": "pnpm@8.4.0"
 }
