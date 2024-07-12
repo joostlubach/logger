@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 
 import { isPlainObject, kebabCase } from 'lodash'
+
 import LoggerTransport from '../LoggerTransport'
 import { Details, LogLevel, Message, Styles } from '../types'
 import { isStyledMessage } from '../util'

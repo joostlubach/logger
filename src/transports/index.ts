@@ -1,1 +1,1 @@
-export { default as ConsoleTransport } from './ConsoleTransport'
+export { default as ConsoleTransport } from './console'
