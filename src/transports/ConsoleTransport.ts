@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 
 import { isPlainObject, kebabCase } from 'lodash'
+import { MethodKey, stringHash } from 'ytil'
 import LoggerTransport from '../LoggerTransport'
 import { Details, LogLevel, Message, Styles } from '../types'
 import { isStyledMessage } from '../util'
@@ -24,16 +25,18 @@ export default class ConsoleTransport extends LoggerTransport {
   public log(tag: string, level: LogLevel, message: Message, details: Details) {
     const args = this.formatMessage(tag, level, message)
 
-    if (details == null || !this.options.detailed) {
+    console.log(args)
+
+    if (details.length === 0 || !this.options.detailed) {
       // Just log the formatted message.
-      console.log(...args)
+      this._console('log', ...args)
     } else if (console.groupCollapsed instanceof Function) {
       // Use the group feature to log the details.
-      console.groupCollapsed(...args)
+      this._console('groupCollapsed', ...args)
       this.logDetails(details)
-      console.groupEnd()
+      this._console('groupEnd')
     } else {
-      console.log(...args)
+      this._console('log', ...args)
       this.logDetails(details)
     }
   }
@@ -43,7 +46,7 @@ export default class ConsoleTransport extends LoggerTransport {
       details.forEach(this.logDetail.bind(this))
     } else if (isPlainObject(details)) {
       for (const [key, value] of Object.entries(details)) {
-        console.log(`%c${key}:`, 'font-weight: bold;')
+        this._console('log', `%c${key}:`, 'font-weight: bold;')
         this.logDetail(value)
       }
     } else {
@@ -53,10 +56,14 @@ export default class ConsoleTransport extends LoggerTransport {
 
   private logDetail(detail: any) {
     if (isPlainObject(detail) && detail.text != null && detail.style != null) {
-      console.log(...this.formatDetail(detail.text, detail.style))
+      this._console('log', ...this.formatDetail(detail.text, detail.style))
     } else {
-      console.log(detail)
+      this._console('log', detail)
     }
+  }
+
+  private _console<K extends MethodKey<typeof console>>(key: K, ...args: any[]) {
+    queueMicrotask(console[key].bind(console, ...args))
   }
 
   protected formatMessage(tag: string, level: LogLevel, message: Message): string[] {
@@ -71,8 +78,10 @@ export default class ConsoleTransport extends LoggerTransport {
       return [`[${tag}] ${level.toUpperCase()}: ${message}`]
     } else {
       return [
-        `%c[${tag}] %c${message}`,
-        'font-weight: bold;',
+        `%c${tag}%c %c${message}`,
+        `display: inline-block; vertical-align: baseline; border-radius: 2px; background: ${this.tagColor(tag)}; padding: 0px 2px; color: #000; font-weight: bold;`,
+        '',
+        ...styles.length === 0 ? [dumpStyles(this.stylesForLevel(level))] : [],
         ...styles.map(style => `font-weight: normal; ${dumpStyles({...this.stylesForLevel(level), ...style})}`),
       ]
     }
@@ -89,11 +98,17 @@ export default class ConsoleTransport extends LoggerTransport {
 
   protected stylesForLevel(level: LogLevel): Styles {
     switch (level) {
+    case 'debug': return {color: '#9CCFE6'}
     case 'info': return {color: '#3887D3'}
     case 'warning': return {backgroundColor: 'yellow'}
     case 'error': return {color: 'red'}
     default: return {}
     }
+  }
+
+  protected tagColor(tag: string) {
+    const seed = stringHash(tag)
+    return `hsl(${seed % 360}, 100%, 80%)`
   }
 
 }

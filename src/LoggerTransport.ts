@@ -3,7 +3,7 @@ import { Details, LogLevel, Message } from './types'
 export default abstract class LoggerTransport {
 
   constructor(
-    public readonly level: LogLevel,
+    public level: LogLevel,
   ) {}
 
   public shouldLog(level: LogLevel) {
