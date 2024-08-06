@@ -25,8 +25,6 @@ export default class ConsoleTransport extends LoggerTransport {
   public log(tag: string, level: LogLevel, message: Message, details: Details) {
     const args = this.formatMessage(tag, level, message)
 
-    console.log(args)
-
     if (details.length === 0 || !this.options.detailed) {
       // Just log the formatted message.
       this._console('log', ...args)
