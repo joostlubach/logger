@@ -2,6 +2,7 @@
 
 import { isPlainObject, kebabCase } from 'lodash'
 import { MethodKey, stringHash } from 'ytil'
+
 import LoggerTransport from '../LoggerTransport'
 import { Details, LogLevel, Message, Styles } from '../types'
 import { isStyledMessage } from '../util'
