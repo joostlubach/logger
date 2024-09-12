@@ -2,7 +2,6 @@
 
 import { isPlainObject, kebabCase } from 'lodash'
 import { MethodKey, stringHash } from 'ytil'
-
 import LoggerTransport from '../LoggerTransport'
 import { Details, LogLevel, Message, Styles } from '../types'
 import { isStyledMessage } from '../util'
@@ -99,7 +98,7 @@ export default class ConsoleTransport extends LoggerTransport {
     switch (level) {
     case 'debug': return {color: '#9CCFE6'}
     case 'info': return {color: '#3887D3'}
-    case 'warning': return {backgroundColor: 'yellow'}
+    case 'warning': return {color: 'yellow'}
     case 'error': return {color: 'red'}
     default: return {}
     }
