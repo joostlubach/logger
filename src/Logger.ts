@@ -52,7 +52,15 @@ export default class Logger {
   // Log
 
   public log(level: LogLevel, message: Message, details: Details = []) {
-    const flattenedDetails = flattenDetails(details)
+    const flattenedDetails = flattenDetails(details).map(value => {
+      for (const serializer of config.valueSerializers) {
+        if (serializer.check(value)) {
+          return serializer.serialize(value)
+        } else {
+          return value
+        }
+      }
+    })
 
     for (const transport of config.transports) {
       if (!transport.shouldLog(level)) { continue }
