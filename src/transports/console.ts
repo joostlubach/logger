@@ -98,7 +98,7 @@ export default class ConsoleTransport extends LoggerTransport {
     switch (level) {
     case 'debug': return {color: '#9CCFE6'}
     case 'info': return {color: '#3887D3'}
-    case 'warning': return {color: 'yellow'}
+    case 'warning': return {background: 'yellow'}
     case 'error': return {color: 'red'}
     default: return {}
     }
