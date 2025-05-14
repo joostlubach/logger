@@ -29,10 +29,13 @@ export default class ConsoleTransport extends LoggerTransport {
       // Just log the formatted message.
       this._console('log', ...args)
     } else if (console.groupCollapsed instanceof Function) {
-      // Use the group feature to log the details.
-      this._console('groupCollapsed', ...args)
-      this.logDetails(details)
-      this._console('groupEnd')
+      try {
+        // Use the group feature to log the details.
+        this._console('groupCollapsed', ...args)
+        this.logDetails(details)
+      } finally {
+        this._console('groupEnd')
+      }
     } else {
       this._console('log', ...args)
       this.logDetails(details)
