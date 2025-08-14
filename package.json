@@ -13,7 +13,7 @@
     "check": "tsc -p . --noEmit",
     "lint": "eslint src --ext ts,tsx",
     "test": "NODE_ENV=test DATA_ENV=test jest"
-},
+  },
   "peerDependencies": {
     "react": "^19.1",
     "react-dom": "^19.1"
@@ -28,6 +28,8 @@
   "devDependencies": {
     "@types/lodash": "^4.17.0",
     "@types/uuid": "^9.0.8",
+    "fs": "^0.0.1-security",
+    "js-yaml": "^4.1.0",
     "typescript": "^5.9.2"
   }
 }
