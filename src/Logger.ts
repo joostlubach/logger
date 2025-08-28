@@ -53,13 +53,13 @@ export default class Logger {
 
   public log(level: LogLevel, message: Message, details: Details = []) {
     const flattenedDetails = flattenDetails(details).map(value => {
-      for (const serializer of config.valueSerializers) {
-        if (serializer.check(value)) {
-          return serializer.serialize(value)
-        } else {
-          return value
+      let transformed: any = value
+      for (const transformer of config.valueTransformers) {
+        if (transformer.check(transformed)) {
+          transformed = transformer.serialize(transformed)
         }
       }
+      return transformed
     })
 
     for (const transport of config.transports) {
