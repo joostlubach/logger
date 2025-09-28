@@ -28,8 +28,11 @@
   "devDependencies": {
     "@types/lodash": "^4.17.0",
     "@types/uuid": "^9.0.8",
-    "fs": "^0.0.1-security",
-    "js-yaml": "^4.1.0",
-    "typescript": "^5.8.3"
-  }
+    "copyfiles": "^2.4.1",
+    "rimraf": "^5.0.5",
+    "tsc-alias": "^1.8.8",
+    "typescript": "5.4.3",
+    "ytil": "workspace:^"
+  },
+  "packageManager": "pnpm@9.9.0"
 }
