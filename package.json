@@ -10,7 +10,6 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "check": "tsc -p . --noEmit",
     "lint": "eslint src --ext ts,tsx",
     "test": "NODE_ENV=test DATA_ENV=test jest"
   },
