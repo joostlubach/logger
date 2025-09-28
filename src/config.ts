@@ -17,13 +17,20 @@ const enabled = (() => {
 })()
 
 export interface Config {
-  transports: LoggerTransport[]
+  transports:        LoggerTransport[]
+  valueTransformers: ValueTransformer[]
+}
+
+export interface ValueTransformer {
+  check:     (value: any) => boolean
+  serialize: (value: any) => string
 }
 
 const config: Config = {
   transports: enabled ? [
     new transports.ConsoleTransport(defaultLogLevel()),
   ] : [],
+  valueTransformers: [],
 }
 
 function defaultLogLevel(): LogLevel {

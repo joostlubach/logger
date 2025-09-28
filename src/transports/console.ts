@@ -2,7 +2,6 @@
 
 import { isPlainObject, kebabCase } from 'lodash'
 import { MethodKey, stringHash } from 'ytil'
-
 import LoggerTransport from '../LoggerTransport'
 import { Details, LogLevel, Message, Styles } from '../types'
 import { isStyledMessage } from '../util'
@@ -30,10 +29,13 @@ export default class ConsoleTransport extends LoggerTransport {
       // Just log the formatted message.
       this._console('log', ...args)
     } else if (console.groupCollapsed instanceof Function) {
-      // Use the group feature to log the details.
-      this._console('groupCollapsed', ...args)
-      this.logDetails(details)
-      this._console('groupEnd')
+      try {
+        // Use the group feature to log the details.
+        this._console('groupCollapsed', ...args)
+        this.logDetails(details)
+      } finally {
+        this._console('groupEnd')
+      }
     } else {
       this._console('log', ...args)
       this.logDetails(details)
@@ -99,7 +101,7 @@ export default class ConsoleTransport extends LoggerTransport {
     switch (level) {
     case 'debug': return {color: '#9CCFE6'}
     case 'info': return {color: '#3887D3'}
-    case 'warning': return {backgroundColor: 'yellow'}
+    case 'warning': return {background: 'yellow'}
     case 'error': return {color: 'red'}
     default: return {}
     }
