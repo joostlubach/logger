@@ -5,13 +5,25 @@
   "author": "Joost Lubach",
   "private": false,
   "license": "MIT",
-  "main": "./src/index.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "default": "./dist/cjs/index.js"
+    }
   },
   "scripts": {
-    "lint": "eslint src --ext ts,tsx",
-    "test": "NODE_ENV=test DATA_ENV=test jest"
+    "build": "npm run clean && npm run build:tsc",
+    "build:tsc": "npm run build:tsc:esm && npm run build:tsc:cjs",
+    "build:tsc:esm": "tsc -p tsconfig.prod.json --module es2022 --outDir dist/esm --declarationDir dist/types",
+    "build:tsc:cjs": "tsc -p tsconfig.prod.json --module commonjs --outDir dist/cjs --declaration false --declarationMap false",
+    "clean": "rimraf dist",
+    "lint": "eslint",
+    "check": "tsc -p . --noEmit",
+    "test": "NODE_ENV=test jest"
   },
   "peerDependencies": {
     "react": "^19.1",
@@ -26,6 +38,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.17.0",
+    "@types/node": "^25.0.3",
     "@types/uuid": "^9.0.8",
     "copyfiles": "^2.4.1",
     "rimraf": "^5.0.5",
