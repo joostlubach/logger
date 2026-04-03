@@ -20,9 +20,10 @@
     "build:tsc": "npm run build:tsc:esm && npm run build:tsc:cjs",
     "build:tsc:esm": "tsc -p tsconfig.prod.json --module es2022 --outDir dist/esm --declarationDir dist/types",
     "build:tsc:cjs": "tsc -p tsconfig.prod.json --module commonjs --outDir dist/cjs --declaration false --declarationMap false",
-    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "clean": "rimraf dist",
+    "check": "tsc -p . --noEmit",
     "lint": "eslint",
-    "test": "NODE_ENV=test DATA_ENV=test jest"
+    "test": "vitest"
   },
   "peerDependencies": {
     "react": "^19.1",
@@ -31,8 +32,6 @@
   "dependencies": {
     "lodash": "^4.17.21",
     "react-timer": "workspace:^",
-    "scroll-into-view": "^1.16.2",
-    "uuid": "^9.0.1",
     "ytil": "workspace:^"
   },
   "devDependencies": {
