@@ -17,6 +17,7 @@ const enabled = (() => {
 })()
 
 export interface Config {
+  modifyTag:         (tag: string) => string
   transports:        LoggerTransport[]
   valueTransformers: ValueTransformer[]
 }
@@ -27,6 +28,7 @@ export interface ValueTransformer {
 }
 
 const config: Config = {
+  modifyTag:  tag => tag,
   transports: enabled ? [
     new transports.ConsoleTransport(defaultLogLevel()),
   ] : [],

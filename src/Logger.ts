@@ -5,10 +5,14 @@ import { flattenDetails } from './util/details'
 export default class Logger {
 
   constructor(tag: string) {
-    this.tag = tag
+    this._tag = tag
   }
 
-  public tag: string
+  private _tag: string
+
+  public get tag() {
+    return config.modifyTag(this._tag)
+  }
 
   //------
   // Static interface
