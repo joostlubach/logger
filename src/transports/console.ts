@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 
 import { isPlainObject, kebabCase } from 'lodash'
-import { MethodKey, stringHash } from 'ytil'
+import { MethodKey, stringHash } from '@mosdev/ytil'
 import LoggerTransport from '../LoggerTransport'
 import { Details, LogLevel, Message, Styles } from '../types'
 import { isStyledMessage } from '../util'

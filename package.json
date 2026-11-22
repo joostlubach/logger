@@ -1,5 +1,5 @@
 {
-  "name": "logger",
+  "name": "@mosdev/logger",
   "description": "Simple browser component-based logger",
   "version": "1.0.1",
   "author": "Joost Lubach",
@@ -31,8 +31,8 @@
   },
   "dependencies": {
     "lodash": "^4.17.21",
-    "react-timer": "workspace:^",
-    "ytil": "workspace:^"
+    "@mosdev/react-timer": "workspace:^",
+    "@mosdev/ytil": "workspace:^"
   },
   "devDependencies": {
     "@stylistic/eslint-plugin": "^5.10.0",
@@ -51,6 +51,6 @@
     "tsc-alias": "^1.8.8",
     "typescript": "^5.8.3",
     "yaml": "^2.8.2",
-    "ytil": "workspace:^"
+    "@mosdev/ytil": "workspace:^"
   }
 }
